@@ -1,7 +1,6 @@
 ### IntelliJ IDEA ###
+.idea/
 out/
-!**/src/main/**/out/
-!**/src/test/**/out/
 
 ### Eclipse ###
 .apt_generated
@@ -12,8 +11,6 @@ out/
 .springBeans
 .sts4-cache
 bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
 
 ### NetBeans ###
 /nbproject/private/
@@ -25,5 +22,12 @@ bin/
 ### VS Code ###
 .vscode/
 
-### Mac OS ###
+### Compiled Java files ###
+*.class
+
+### Build directories ###
+target/
+
+### Operating System files ###
 .DS_Store
+Thumbs.db
