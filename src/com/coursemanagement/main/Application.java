@@ -1,4 +1,4 @@
-package main;
+package com.coursemanagement.main;
 
 public class Application {
     public static void main(String[] args) {
