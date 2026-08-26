@@ -2,6 +2,6 @@ package com.coursemanagement.model.Enums;
 
 public enum PaymentMethod {
     CASH,
-    CARD,
-    ONLINE
+    CREDIT_CARD,
+    BANK_TRANSFER
 }
