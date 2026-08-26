@@ -1,34 +1,44 @@
 package com.coursemanagement.repository.repository.impl;
 
-import com.coursemanagement.model.Student;
+import com.coursemanagement.model.Course;
 import com.coursemanagement.repository.CourseRepository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class InMemoryCourseRepository implements CourseRepository {
-    @Override
-    public void save(Student student) {
 
+    private Map<Long, Course> courses = new HashMap<>();
+    private long nextId = 1L;
+
+    @Override
+    public void save(Course course) {
+        if (course.getId() == null) {
+            course.setId(nextId++);
+        }
+        courses.put(course.getId(), course);
     }
 
     @Override
-    public Optional<Student> findById(int id) {
-        return Optional.empty();
+    public Optional<Course> findById(Long id) {
+        return Optional.ofNullable(courses.get(id));
     }
 
     @Override
-    public List<Student> findAll() {
-        return List.of();
+    public List<Course> findAll() {
+        return new ArrayList<>(courses.values());
     }
 
     @Override
-    public void deleteById(int id) {
-
+    public void deleteById(Long id) {
+        courses.remove(id);
     }
 
     @Override
-    public boolean existsById(int id) {
-        return false;
+    public boolean existsById(Long id) {
+        return courses.containsKey(id);
     }
 }

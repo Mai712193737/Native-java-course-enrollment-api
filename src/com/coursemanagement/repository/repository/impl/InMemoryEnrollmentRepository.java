@@ -1,39 +1,60 @@
 package com.coursemanagement.repository.repository.impl;
 
-import com.coursemanagement.model.Student;
+import com.coursemanagement.model.Enrollment;
 import com.coursemanagement.repository.EnrollmentRepository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class InMemoryEnrollmentRepository implements EnrollmentRepository {
-    @Override
-    public void save(EnrollmentRepository enrollmentRepository) {
 
+    private Map<Long, Enrollment> enrollments = new HashMap<>();
+    private long nextId = 1L;
+
+    @Override
+    public void save(Enrollment enrollment) {
+        if (enrollment.getId() == null) {
+            enrollment.setId(nextId++);
+        }
+        enrollments.put(enrollment.getId(), enrollment);
     }
 
     @Override
-    public Optional<EnrollmentRepository> findById(int id) {
-        return Optional.empty();
+    public Optional<Enrollment> findById(Long id) {
+        return Optional.ofNullable(enrollments.get(id));
     }
 
     @Override
-    public List<EnrollmentRepository> findAll() {
-        return List.of();
+    public List<Enrollment> findAll() {
+        return new ArrayList<>(enrollments.values());
     }
 
     @Override
-    public Optional<Student> findByStudentId(int Student_id) {
-        return Optional.empty();
+    public List<Enrollment> findByStudentId(Long studentId) {
+        List<Enrollment> result = new ArrayList<>();
+        for (Enrollment enrollment : enrollments.values()) {
+            if (enrollment.getStudentId().equals(studentId)) {
+                result.add(enrollment);
+            }
+        }
+        return result;
     }
 
     @Override
-    public void existsByStudentIdAndCourseId(int StudentId, int CourseId) {
-
+    public boolean existsByStudentIdAndCourseId(Long studentId, Long courseId) {
+        for (Enrollment enrollment : enrollments.values()) {
+            if (enrollment.getStudentId().equals(studentId) && enrollment.getCourseId().equals(courseId)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
-    public void deleteById(int id) {
-
+    public void deleteById(Long id) {
+        enrollments.remove(id);
     }
 }

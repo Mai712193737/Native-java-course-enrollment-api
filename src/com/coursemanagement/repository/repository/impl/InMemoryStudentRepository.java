@@ -3,6 +3,7 @@ package com.coursemanagement.repository.repository.impl;
 import com.coursemanagement.model.Student;
 import com.coursemanagement.repository.StudentRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,46 +12,41 @@ import java.util.Optional;
 public class InMemoryStudentRepository implements StudentRepository {
 
     private Map<Long, Student> students = new HashMap<>();
-    private Long nextId = 1L;
-
+    private long nextId = 1L;
 
     @Override
     public void save(Student student) {
-
-        if(student.getId() == 0) {
+        if (student.getId() == null) {
             student.setId(nextId++);
         }
-
         students.put(student.getId(), student);
     }
 
     @Override
-    public Optional<Student> findById(int id) {
-        return Optional.ofNullable(students.get((long) id));
+    public Optional<Student> findById(Long id) {
+        return Optional.ofNullable(students.get(id));
     }
 
     @Override
-    public String findByEmail(String Email) {
-        return "";
+    public Optional<Student> findByEmail(String email) {
+        return students.values().stream()
+                .filter(student -> student.getEmail().equals(email))
+                .findFirst();
     }
 
     @Override
     public List<Student> findAll() {
-        return students ;
+        return new ArrayList<>(students.values());
     }
 
     @Override
-    public void existsByEmail(String Email) {
-
+    public boolean existsByEmail(String email) {
+        return students.values().stream()
+                .anyMatch(student -> student.getEmail().equals(email));
     }
 
     @Override
-    public void deleteById(int id) {
-        students.remove((long) id);
-    }
-
-    @Override
-    public boolean existsById(int id) {
-        return students.containsKey((long) id);
+    public void deleteById(Long id) {
+        students.remove(id);
     }
 }
