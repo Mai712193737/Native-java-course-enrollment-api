@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AuditLogRepository {
+
     void save(AuditLog auditLog);
 
-    Optional<AuditLog> findById(int id);
+    Optional<AuditLog> findById(Long id);
 
     List<AuditLog> findAll();
 

@@ -6,19 +6,12 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PaymentRepository {
-    /*save
-    findById
-    findByEnrollmentId
-    findAll*/
 
-    public void save (PaymentRepository paymentRepository);
+    void save(Payment payment);
 
-    Optional<Payment> findById(int id);
+    Optional<Payment> findById(Long id);
 
-    Optional<Payment> findByEnrollmentId(int enrollmentId);
+    Optional<Payment> findByEnrollmentId(Long enrollmentId);
 
     List<Payment> findAll();
-
-
-
 }

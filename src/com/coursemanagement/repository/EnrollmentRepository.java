@@ -1,28 +1,21 @@
 package com.coursemanagement.repository;
 
-import com.coursemanagement.model.Student;
+import com.coursemanagement.model.Enrollment;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EnrollmentRepository {
-    /*save
-    findById
-    findAll
-    findByStudentId
-    existsByStudentIdAndCourseId
-    deleteById
-     */
-     public void save (EnrollmentRepository enrollmentRepository);
 
-    public Optional<EnrollmentRepository> findById(int id);
+    void save(Enrollment enrollment);
 
-    List<EnrollmentRepository> findAll();
+    Optional<Enrollment> findById(Long id);
 
-    public Optional<Student> findByStudentId(int Student_id);
+    List<Enrollment> findAll();
 
-    public void existsByStudentIdAndCourseId(int StudentId, int CourseId );
+    List<Enrollment> findByStudentId(Long studentId);
 
-    public void deleteById(int id );
+    boolean existsByStudentIdAndCourseId(Long studentId, Long courseId);
 
+    void deleteById(Long id);
 }

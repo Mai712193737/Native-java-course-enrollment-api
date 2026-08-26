@@ -1,21 +1,19 @@
 package com.coursemanagement.repository;
-import com.coursemanagement.model.Student;
-import java.util.Optional;
+
+import com.coursemanagement.model.Course;
+
 import java.util.List;
+import java.util.Optional;
+
 public interface CourseRepository {
-    /*save
-     findById
-     findAll
-     deleteById
-     existsById*/
 
-    void save(Student student);
+    void save(Course course);
 
-    Optional<Student> findById(int id);
+    Optional<Course> findById(Long id);
 
-    List<Student> findAll();
+    List<Course> findAll();
 
-    void deleteById(int id);
+    void deleteById(Long id);
 
-    boolean existsById(int id);
+    boolean existsById(Long id);
 }

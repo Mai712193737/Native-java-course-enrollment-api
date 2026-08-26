@@ -3,23 +3,19 @@ package com.coursemanagement.repository;
 import com.coursemanagement.model.Student;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StudentRepository {
-//save**
-//findById**
-//findByEmail**
-//findAll 🤺
-//existsByEmail **
-//deleteById**
-    void save(Student student );
 
-    String findById(int id );
+    void save(Student student);
 
-    String findByEmail(String Email);
+    Optional<Student> findById(Long id);
+
+    Optional<Student> findByEmail(String email);
 
     List<Student> findAll();
 
-    Boolean existsByEmail( String Email);
+    boolean existsByEmail(String email);
 
-    void deleteById (int id );
+    void deleteById(Long id);
 }
